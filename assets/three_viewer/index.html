@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>装配式地铁车站三维查看器</title>
+  <style>__VIEWER_CSS__</style>
+</head>
+<body>
+  <div id="viewer-shell">
+    <canvas id="stage"></canvas>
+
+    <div class="viewer-topbar">
+      <label>
+        楼层范围
+        <select id="layer">
+          <option value="all">全部构件</option>
+          <option value="base">基础与底板</option>
+          <option value="middle">中部结构与中板</option>
+          <option value="upper">侧墙、顶板与楼梯</option>
+        </select>
+      </label>
+      <label>
+        着色依据
+        <select id="color-mode">
+          <option value="type">构件类型</option>
+          <option value="status">安装状态</option>
+          <option value="risk">风险等级</option>
+          <option value="crane">吊装设备</option>
+        </select>
+      </label>
+      <label>
+        相机视图
+        <select id="camera">
+          <option value="iso">45°轴测</option>
+          <option value="end">端部视图</option>
+          <option value="side">侧视图</option>
+          <option value="top">俯视图</option>
+        </select>
+      </label>
+      <button id="reset-camera" type="button">复位</button>
+    </div>
+
+    <div id="viewer-legend" class="viewer-legend"></div>
+
+    <div id="viewer-info" class="viewer-info">
+      <strong>构件信息</strong>
+      <span>点击实体构件查看定位、吊装顺序和设备信息</span>
+    </div>
+
+    <div class="viewer-progress">
+      <label for="progress">吊装进度</label>
+      <input id="progress" type="range" min="0" max="100" value="0" step="1">
+      <span id="progress-value" class="progress-value">0%</span>
+      <button id="play" class="play-button" type="button">播放</button>
+    </div>
+
+    <div id="viewer-loading" class="viewer-loading">正在加载三维引擎...</div>
+  </div>
+
+  <script id="viewer-payload" type="application/json">__VIEWER_PAYLOAD__</script>
+  <script id="three-source" type="text/plain">__THREE_SOURCE_BASE64__</script>
+  <script id="three-core-source" type="text/plain">__THREE_CORE_SOURCE_BASE64__</script>
+  <script type="module">
+    const payload = JSON.parse(document.getElementById("viewer-payload").textContent);
+    const encodedThree = document.getElementById("three-source").textContent.trim();
+    const encodedThreeCore = document
+      .getElementById("three-core-source")
+      .textContent.trim();
+    const decodedThree = new TextDecoder().decode(
+      Uint8Array.from(atob(encodedThree), (character) => character.charCodeAt(0)),
+    );
+    const decodedThreeCore = new TextDecoder().decode(
+      Uint8Array.from(atob(encodedThreeCore), (character) => character.charCodeAt(0)),
+    );
+    let THREE;
+    let localThreeError = null;
+    let threeCoreUrl = null;
+    let threeUrl = null;
+    try {
+      threeCoreUrl = URL.createObjectURL(
+        new Blob([decodedThreeCore], { type: "text/javascript" }),
+      );
+      const resolvedThreeSource = decodedThree
+        .replaceAll('"./three.core.min.js"', JSON.stringify(threeCoreUrl))
+        .replaceAll("'./three.core.min.js'", JSON.stringify(threeCoreUrl));
+      threeUrl = URL.createObjectURL(
+        new Blob([resolvedThreeSource], { type: "text/javascript" }),
+      );
+      THREE = await import(threeUrl);
+      URL.revokeObjectURL(threeUrl);
+      URL.revokeObjectURL(threeCoreUrl);
+    } catch (error) {
+      localThreeError = error;
+      if (threeUrl) URL.revokeObjectURL(threeUrl);
+      if (threeCoreUrl) URL.revokeObjectURL(threeCoreUrl);
+      const remoteCandidates = [
+        "https://cdn.jsdelivr.net/npm/three@0.180.0/build/three.module.min.js",
+        "https://unpkg.com/three@0.180.0/build/three.module.min.js",
+        "https://esm.sh/three@0.180.0",
+      ];
+      let remoteError = null;
+      for (const remoteUrl of remoteCandidates) {
+        try {
+          THREE = await import(remoteUrl);
+          remoteError = null;
+          break;
+        } catch (error) {
+          remoteError = error;
+        }
+      }
+      if (!THREE) {
+        console.error("Local Three.js load failed:", localThreeError);
+        console.error("Remote Three.js load failed:", remoteError);
+        document.getElementById("viewer-loading").textContent =
+          "本地 Three.js 缺少 three.core.min.js，且无法访问备用 CDN。";
+        throw remoteError;
+      }
+    }
+
+    __VIEWER_JS__
+  </script>
+</body>
+</html>
