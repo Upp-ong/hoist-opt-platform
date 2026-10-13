@@ -11,9 +11,9 @@ const resetButton = document.getElementById("reset-camera");
 const infoPanel = document.getElementById("viewer-info");
 
 const statusColors = {
-  completed: "#0d8b87",
-  current: "#ef6a32",
-  next: "#e3a21a",
+  completed: "#2563eb",
+  current: "#f97316",
+  next: "#22c55e",
 };
 
 const layerGroups = {
@@ -27,7 +27,7 @@ const timelineEnd = Math.max(
   ...payload.components.map((component) => Number(component.end) || 0),
   1,
 );
-const cranePalette = ["#ef6a32", "#0d8b87", "#e3a21a", "#8a67c7"];
+const cranePalette = ["#2563eb", "#f97316", "#22c55e", "#a855f7"];
 const craneColors = new Map(
   payload.cranes.map((crane, index) => [
     crane.id,
@@ -52,8 +52,8 @@ renderer.toneMappingExposure = 1.08;
 renderer.shadowMap.enabled = false;
 
 const scene = new THREE.Scene();
-scene.background = new THREE.Color("#f4f1e8");
-scene.fog = new THREE.Fog("#f4f1e8", payload.dimensions.spanX * 1.8, payload.dimensions.spanX * 3.8);
+scene.background = new THREE.Color("#141822");
+scene.fog = new THREE.Fog("#141822", payload.dimensions.spanX * 1.8, payload.dimensions.spanX * 3.8);
 
 const camera = new THREE.PerspectiveCamera(42, 1, 0.1, 5000);
 const target = new THREE.Vector3(0, payload.dimensions.height * 0.36, 0);
@@ -74,7 +74,7 @@ const ground = new THREE.Mesh(
     payload.dimensions.spanY * 1.35,
   ),
   new THREE.MeshStandardMaterial({
-    color: 0xd9d5ca,
+    color: 0x1e2534,
     roughness: 0.98,
     metalness: 0.0,
   }),
@@ -84,7 +84,7 @@ ground.position.y = -0.22;
 modelGroup.add(ground);
 
 const gridSize = Math.max(payload.dimensions.spanX, payload.dimensions.spanY) * 1.3;
-const grid = new THREE.GridHelper(gridSize, 24, 0xb7b8b0, 0xdad7cf);
+const grid = new THREE.GridHelper(gridSize, 24, 0x475569, 0x273449);
 grid.position.y = -0.18;
 grid.scale.z = payload.dimensions.spanY / Math.max(payload.dimensions.spanX, 1);
 modelGroup.add(grid);
@@ -131,7 +131,7 @@ function makeCraneLabel(text, color) {
   context.strokeStyle = color;
   context.lineWidth = 8;
   context.strokeRect(4, 4, canvas.width - 8, canvas.height - 8);
-  context.fillStyle = "#fffdf7";
+  context.fillStyle = "#ffffff";
   context.font = "700 48px Microsoft YaHei, sans-serif";
   context.textAlign = "center";
   context.textBaseline = "middle";
@@ -170,7 +170,7 @@ payload.components.forEach((component, index) => {
   const edges = new THREE.LineSegments(
     new THREE.EdgesGeometry(geometry, 30),
     new THREE.LineBasicMaterial({
-      color: 0x183a37,
+      color: 0x334155,
       transparent: true,
       opacity: 0.55,
       depthWrite: false,
@@ -199,7 +199,7 @@ payload.components.forEach((component, index) => {
 });
 
 payload.cranes.forEach((crane) => {
-  const craneColor = craneColors.get(crane.id) || "#ef6a32";
+  const craneColor = craneColors.get(crane.id) || "#2563eb";
   const railStart = threePosition(crane.railStartX, crane.trolleyMinY, 0.12);
   const railEnd = threePosition(crane.railEndX, crane.trolleyMaxY, 0.12);
   const railGeometry = new THREE.BufferGeometry().setFromPoints([
@@ -209,7 +209,7 @@ payload.cranes.forEach((crane) => {
   modelGroup.add(
     new THREE.Line(
       railGeometry,
-      new THREE.LineBasicMaterial({ color: 0x59655f }),
+      new THREE.LineBasicMaterial({ color: 0x475569 }),
     ),
   );
   const farRailGeometry = new THREE.BufferGeometry().setFromPoints([
@@ -219,7 +219,7 @@ payload.cranes.forEach((crane) => {
   modelGroup.add(
     new THREE.Line(
       farRailGeometry,
-      new THREE.LineBasicMaterial({ color: 0x59655f }),
+      new THREE.LineBasicMaterial({ color: 0x475569 }),
     ),
   );
 
@@ -229,7 +229,7 @@ payload.cranes.forEach((crane) => {
   gantryGroup.position.x =
     crane.x - payload.dimensions.centerX;
   const legMaterial = new THREE.MeshStandardMaterial({
-    color: 0x3f4d48,
+    color: 0x334155,
     roughness: 0.68,
     metalness: 0.20,
   });
@@ -303,23 +303,23 @@ function renderLegend() {
       items.push(
         legendItem(
           payload.typeLabels[type] || type,
-          payload.typeColors[type] || "#9da39f",
+          payload.typeColors[type] || "#94a3b8",
         ),
       );
     });
   } else if (mode === "risk") {
     items.push(
-      legendItem("低风险 <20", "#7f9e3a"),
-      legendItem("中风险 20-35", "#e3a21a"),
-      legendItem("较高风险 35-50", "#ef6a32"),
-      legendItem("高风险 ≥50", "#c74436"),
+      legendItem("低风险 <20", "#22c55e"),
+      legendItem("中风险 20-35", "#eab308"),
+      legendItem("较高风险 35-50", "#f97316"),
+      legendItem("高风险 ≥50", "#ef4444"),
     );
   } else if (mode === "crane") {
     payload.cranes.forEach((crane) => {
       items.push(
         legendItem(
           `${crane.id} 吊装设备`,
-          craneColors.get(crane.id) || "#9da39f",
+          craneColors.get(crane.id) || "#94a3b8",
         ),
       );
     });
@@ -328,7 +328,7 @@ function renderLegend() {
       legendItem("已完成", statusColors.completed),
       legendItem("当前吊装", statusColors.current),
       legendItem("下一件", statusColors.next),
-      legendItem("待安装定位", "#9da39f"),
+      legendItem("待安装定位", "#94a3b8"),
     );
   }
   items.push(
@@ -338,16 +338,16 @@ function renderLegend() {
 }
 
 function riskColor(risk) {
-  if (risk >= 50) return "#c74436";
-  if (risk >= 35) return "#ef6a32";
-  if (risk >= 20) return "#e3a21a";
-  return "#7f9e3a";
+  if (risk >= 50) return "#ef4444";
+  if (risk >= 35) return "#f97316";
+  if (risk >= 20) return "#eab308";
+  return "#22c55e";
 }
 
 function componentColor(component, status) {
   const mode = colorSelect.value;
   if (mode === "crane") {
-    return craneColors.get(component.crane) || "#9da39f";
+    return craneColors.get(component.crane) || "#94a3b8";
   }
   if (mode === "risk") return riskColor(component.risk);
   if (mode === "type") return component.color;

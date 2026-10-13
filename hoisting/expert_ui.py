@@ -193,6 +193,10 @@ def render_sensitivity_analysis(result: OptimizationResult) -> None:
                 margin={"l": 34, "r": 20, "t": 28, "b": 42},
                 paper_bgcolor="rgba(0,0,0,0)",
                 plot_bgcolor="rgba(0,0,0,0)",
+                font={
+                    "family": "Microsoft YaHei, Noto Sans CJK SC, sans-serif",
+                    "color": COLORS["ink"],
+                },
                 xaxis={"title": "Pareto 解"},
                 yaxis={"title": "入选比例", "tickformat": ".0%", "gridcolor": COLORS["grid"]},
                 showlegend=False,
@@ -353,7 +357,10 @@ def _build_parallel_coordinates(
         margin={"l": 58, "r": 44, "t": 42, "b": 42},
         paper_bgcolor="rgba(0,0,0,0)",
         plot_bgcolor="rgba(0,0,0,0)",
-        font={"family": "Microsoft YaHei, Noto Sans CJK SC, sans-serif"},
+                font={
+                    "family": "Microsoft YaHei, Noto Sans CJK SC, sans-serif",
+                    "color": COLORS["ink"],
+                },
     )
     return figure
 
@@ -382,7 +389,7 @@ def _build_objective_projections(
                     "size": 8,
                     "color": COLORS["teal"],
                     "opacity": 0.78,
-                    "line": {"color": "#fffdf7", "width": 0.6},
+                    "line": {"color": "#ffffff", "width": 0.6},
                 },
                 hovertemplate=(
                     f"{EXPERT_OBJECTIVE_NAMES[horizontal]} %{{x:.2f}}<br>"
@@ -410,7 +417,10 @@ def _build_objective_projections(
         margin={"l": 48, "r": 24, "t": 52, "b": 46},
         paper_bgcolor="rgba(0,0,0,0)",
         plot_bgcolor="rgba(0,0,0,0)",
-        font={"family": "Microsoft YaHei, Noto Sans CJK SC, sans-serif"},
+        font={
+            "family": "Microsoft YaHei, Noto Sans CJK SC, sans-serif",
+            "color": COLORS["ink"],
+        },
     )
     return figure
 

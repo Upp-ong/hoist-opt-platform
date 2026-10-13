@@ -1,13 +1,13 @@
 :root {
-  color-scheme: light;
-  --ink: #18211f;
-  --muted: #6d746e;
-  --line: #d7d3c8;
-  --paper: #f4f1e8;
-  --panel: rgba(255, 253, 247, 0.94);
-  --orange: #ef6a32;
-  --amber: #e3a21a;
-  --teal: #0d8b87;
+  color-scheme: dark;
+  --ink: #cbd5e1;
+  --muted: #94a3b8;
+  --line: #334155;
+  --paper: #141822;
+  --panel: rgba(30, 37, 52, 0.94);
+  --orange: #f97316;
+  --amber: #eab308;
+  --teal: #2563eb;
 }
 
 * {
@@ -31,7 +31,7 @@ body {
   height: 100%;
   overflow: hidden;
   border: 1px solid var(--line);
-  background: #f4f1e8;
+  background: #141822;
 }
 
 #stage {
@@ -53,7 +53,7 @@ body {
   padding: 8px;
   background: var(--panel);
   border: 1px solid var(--line);
-  box-shadow: 0 7px 22px rgba(24, 33, 31, 0.08);
+  box-shadow: 0 7px 22px rgba(0, 0, 0, 0.28);
 }
 
 .viewer-topbar label {
@@ -67,10 +67,10 @@ body {
 .viewer-topbar select,
 .viewer-topbar button {
   height: 30px;
-  border: 1px solid #cdc9bd;
+  border: 1px solid #334155;
   border-radius: 1px;
-  background: #fffdf7;
-  color: var(--ink);
+  background: #1e2534;
+  color: #cbd5e1;
   font: inherit;
   font-size: 11px;
 }
@@ -92,9 +92,9 @@ body {
   gap: 5px 10px;
   max-width: 430px;
   padding: 7px 9px;
-  background: rgba(255, 253, 247, 0.83);
-  border: 1px solid rgba(215, 211, 200, 0.9);
-  color: #505851;
+  background: rgba(30, 37, 52, 0.9);
+  border: 1px solid #334155;
+  color: #cbd5e1;
   font-size: 10px;
 }
 
@@ -120,7 +120,7 @@ body {
   background: var(--panel);
   border: 1px solid var(--line);
   border-left: 4px solid var(--orange);
-  box-shadow: 0 8px 24px rgba(24, 33, 31, 0.08);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
   font-size: 11px;
   line-height: 1.55;
 }
@@ -133,7 +133,7 @@ body {
 
 .viewer-info span {
   display: block;
-  color: #566059;
+  color: #cbd5e1;
 }
 
 .viewer-progress {
@@ -149,7 +149,7 @@ body {
   padding: 9px 10px;
   background: var(--panel);
   border: 1px solid var(--line);
-  box-shadow: 0 -5px 20px rgba(24, 33, 31, 0.07);
+  box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.26);
 }
 
 .viewer-progress label {
@@ -173,13 +173,19 @@ body {
 
 .play-button {
   height: 28px;
-  border: 1px solid #394640;
-  background: #26322e;
-  color: #fffdf7;
+  border: 1px solid #334155;
+  background: #1e2534;
+  color: #cbd5e1;
   font: inherit;
   font-size: 11px;
   font-weight: 700;
   cursor: pointer;
+}
+
+.play-button:hover {
+  border-color: #2563eb;
+  background: #2563eb;
+  color: #ffffff;
 }
 
 .viewer-loading {

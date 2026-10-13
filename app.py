@@ -52,6 +52,7 @@ from hoisting.presentation import (
     APP_CSS,
     decision_summary,
     hero_html,
+    highlight_high_risk_rows,
     plan_tiles_html,
     schedule_frame,
     sidebar_brand_html,
@@ -1242,7 +1243,7 @@ with project_data_tab:
         )
         if st.button(
             "保存当前项目",
-            type="primary",
+            type="secondary",
             use_container_width=True,
         ):
             imported_relations = st.session_state.get("imported_relations")
@@ -1535,6 +1536,7 @@ with sequence_tab:
             data=schedule_csv,
             file_name=f"{active_config['station_name']}_{selected_plan_name}_吊装调度方案.csv",
             mime="text/csv",
+            type="primary",
             use_container_width=True,
         )
     st.plotly_chart(
@@ -1549,7 +1551,7 @@ with sequence_tab:
             unsafe_allow_html=True,
         )
         st.dataframe(
-            schedule_data.head(18),
+            highlight_high_risk_rows(schedule_data.head(18)),
             use_container_width=True,
             hide_index=True,
             height=500,

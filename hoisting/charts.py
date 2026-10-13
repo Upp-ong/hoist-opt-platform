@@ -11,29 +11,41 @@ from .domain import Component, TYPE_SPECS
 
 
 COLORS = {
-    "ink": "#18211f",
-    "muted": "#6f746f",
-    "paper": "#fbfaf5",
-    "grid": "#d9d7ce",
-    "orange": "#ef6a32",
-    "amber": "#e3a21a",
-    "teal": "#0d8b87",
-    "green": "#7f9e3a",
-    "red": "#c74436",
-    "blue": "#4277a8",
-    "violet": "#80639d",
+    "ink": "#cbd5e1",
+    "muted": "#94a3b8",
+    "paper": "#1e2534",
+    "grid": "#334155",
+    "orange": "#f97316",
+    "amber": "#eab308",
+    "teal": "#2563eb",
+    "green": "#22c55e",
+    "red": "#ef4444",
+    "blue": "#2563eb",
+    "violet": "#a855f7",
 }
 
 TYPE_COLORS = {
-    "bottom_slab": "#0d8b87",
-    "column": "#ef6a32",
-    "side_wall": "#4277a8",
-    "beam": "#e3a21a",
-    "middle_slab": "#7f9e3a",
-    "platform_slab": "#80639d",
-    "roof_slab": "#c74436",
-    "stair": "#635b53",
+    "bottom_slab": "#2563eb",
+    "column": "#f97316",
+    "side_wall": "#22c55e",
+    "beam": "#a855f7",
+    "middle_slab": "#0ea5e9",
+    "platform_slab": "#ec4899",
+    "roof_slab": "#eab308",
+    "stair": "#94a3b8",
 }
+
+PLAN_COLORS = {
+    "A": "#2563eb",
+    "B": "#f97316",
+    "C": "#22c55e",
+    "D": "#a855f7",
+}
+
+
+def _plan_color(plan_name: str, fallback: str = "#2563eb") -> str:
+    prefix = str(plan_name).strip()[:1].upper()
+    return PLAN_COLORS.get(prefix, fallback)
 
 
 def _base_layout(height: int = 430, margin: dict | None = None) -> dict:
@@ -50,14 +62,14 @@ def _base_layout(height: int = 430, margin: dict | None = None) -> dict:
             "xanchor": "left",
             "x": 0,
             "font": {"size": 11},
-            "bgcolor": "rgba(255,253,247,0.78)",
-            "bordercolor": "rgba(120,125,120,0.24)",
+            "bgcolor": "rgba(30,37,52,0.88)",
+            "bordercolor": "rgba(51,65,85,0.9)",
             "borderwidth": 1,
         },
         "hoverlabel": {
-            "bgcolor": COLORS["ink"],
-            "font": {"color": "#fffdf7", "size": 12},
-            "bordercolor": COLORS["ink"],
+            "bgcolor": "#1e2534",
+            "font": {"color": "#ffffff", "size": 12},
+            "bordercolor": "#334155",
         },
     }
 
@@ -102,10 +114,10 @@ LAYER_FILTERS = {
 }
 
 STATUS_STYLES = {
-    "已完成": {"color": "#0d8b87", "opacity": 1.0},
-    "当前吊装": {"color": "#ef6a32", "opacity": 1.0},
-    "下一件": {"color": "#e3a21a", "opacity": 0.96},
-    "未安装": {"color": "#9da39f", "opacity": 0.68},
+    "已完成": {"color": "#2563eb", "opacity": 1.0},
+    "当前吊装": {"color": "#f97316", "opacity": 1.0},
+    "下一件": {"color": "#22c55e", "opacity": 0.96},
+    "未安装": {"color": "#94a3b8", "opacity": 0.68},
 }
 
 
@@ -455,26 +467,26 @@ def build_site_figure(
         scene={
             "xaxis": {
                 "title": "纵向里程 (m)",
-                "gridcolor": "rgba(120,125,120,0.18)",
-                "backgroundcolor": "rgba(255,255,255,0.12)",
+                "gridcolor": "rgba(51,65,85,0.55)",
+                "backgroundcolor": "rgba(30,37,52,0.65)",
                 "showbackground": True,
                 "range": [view_min_x, view_max_x],
             },
             "yaxis": {
                 "title": "横向轴线 (m)",
-                "gridcolor": "rgba(120,125,120,0.18)",
-                "backgroundcolor": "rgba(255,255,255,0.12)",
+                "gridcolor": "rgba(51,65,85,0.55)",
+                "backgroundcolor": "rgba(30,37,52,0.65)",
                 "showbackground": True,
                 "range": [view_min_y, view_max_y],
             },
             "zaxis": {
                 "title": "安装标高 (m)",
-                "gridcolor": "rgba(120,125,120,0.18)",
-                "backgroundcolor": "rgba(255,255,255,0.04)",
+                "gridcolor": "rgba(51,65,85,0.55)",
+                "backgroundcolor": "rgba(30,37,52,0.35)",
                 "showbackground": True,
                 "range": [min(-1.0, min_z - 1.0), max_z + 4.0],
             },
-            "bgcolor": "rgba(242,240,233,0.35)",
+            "bgcolor": "rgba(20,24,34,0.65)",
             "camera": {"eye": camera_eye, "up": {"x": 0.0, "y": 0.0, "z": 1.0}},
             "aspectmode": "manual",
             "aspectratio": camera_aspect,
@@ -652,7 +664,7 @@ def _component_position_trace(
             "color": colors,
             "symbol": "diamond",
             "opacity": 0.60,
-            "line": {"color": "#fffdf7", "width": 0.7},
+            "line": {"color": "#ffffff", "width": 0.7},
         },
         text=hover,
         hovertemplate="%{text}<extra></extra>",
@@ -1486,7 +1498,12 @@ def build_gantt_figure(schedule: Sequence[dict], max_tasks: int = 30) -> go.Figu
         crane: color
         for crane, color in zip(
             sorted(frame["crane"].unique()),
-            [COLORS["orange"], COLORS["teal"], COLORS["blue"]],
+            [
+                COLORS["blue"],
+                COLORS["orange"],
+                COLORS["violet"],
+                COLORS["green"],
+            ],
         )
     }
     figure = go.Figure()
@@ -1504,7 +1521,7 @@ def build_gantt_figure(schedule: Sequence[dict], max_tasks: int = 30) -> go.Figu
                 text=[f"{value:.0f} min" for value in group["duration"]],
                 textposition="inside",
                 insidetextanchor="middle",
-                textfont={"size": 9, "color": "#fffdf7"},
+                textfont={"size": 9, "color": "#ffffff"},
                 customdata=np.stack(
                     [
                         group["component_type"],
@@ -1573,20 +1590,10 @@ def build_pareto_figure(
                 y=objectives[:, vertical],
                 mode="markers",
                 marker={
-                    "size": 10,
-                    "color": compromise,
-                    "colorscale": [
-                        [0.0, COLORS["teal"]],
-                        [0.55, COLORS["amber"]],
-                        [1.0, COLORS["red"]],
-                    ],
-                    "showscale": position == 3,
-                    "colorbar": {
-                        "title": "综合偏差",
-                        "x": 1.02,
-                        "thickness": 10,
-                    },
-                    "line": {"color": "#fffdf7", "width": 0.8},
+                    "size": 5,
+                    "color": "#94a3b8",
+                    "opacity": 0.72,
+                    "line": {"color": "#1e2534", "width": 0.35},
                 },
                 name="Pareto 解",
                 showlegend=position == 1,
@@ -1608,12 +1615,12 @@ def build_pareto_figure(
                     marker={
                         "size": 14,
                         "symbol": "diamond",
-                        "color": COLORS["ink"],
-                        "line": {"color": COLORS["amber"], "width": 1.4},
+                        "color": _plan_color(plan_name),
+                        "line": {"color": "#ffffff", "width": 1.5},
                     },
                     text=[plan_name.split(" · ")[0]],
                     textposition="top center",
-                    textfont={"size": 10},
+                    textfont={"size": 10, "color": "#f8fafc"},
                     name=plan_name,
                     showlegend=position == 1,
                     hovertemplate=(
@@ -1651,8 +1658,8 @@ def build_pareto_figure(
         "xanchor": "center",
         "x": 0.5,
         "font": {"size": 11},
-        "bgcolor": "rgba(255,253,247,0.78)",
-        "bordercolor": "rgba(120,125,120,0.24)",
+        "bgcolor": "rgba(30,37,52,0.88)",
+        "bordercolor": "rgba(51,65,85,0.9)",
         "borderwidth": 1,
     }
     figure.update_layout(**pareto_layout)
@@ -1681,7 +1688,7 @@ def build_convergence_figure(history: dict[str, list[float]]) -> go.Figure:
                 line={"color": color, "width": 2.6},
                 marker={"size": 4},
                 fill="tozeroy",
-                fillcolor="rgba(13,139,135,0.08)" if position == 1 else "rgba(239,106,50,0.06)",
+                fillcolor="rgba(37,99,235,0.12)" if position == 1 else "rgba(249,115,22,0.10)",
                 hovertemplate="第 %{x} 代<br>%{y:.3f}<extra></extra>",
                 name=axis_title,
                 showlegend=False,
@@ -1729,17 +1736,23 @@ def build_plan_radar(plans: dict[str, dict]) -> go.Figure:
         else:
             normalised[column] = 100.0 * (maximum - values) / (maximum - minimum)
     categories = list(normalised.columns)
-    colors = [COLORS["teal"], COLORS["orange"], COLORS["red"], COLORS["ink"]]
+    colors = [
+        PLAN_COLORS["A"],
+        PLAN_COLORS["B"],
+        PLAN_COLORS["C"],
+        PLAN_COLORS["D"],
+    ]
     figure = go.Figure()
     for index, (plan_name, row) in enumerate(normalised.iterrows()):
         values = row.tolist()
+        plan_color = _plan_color(plan_name, colors[index % len(colors)])
         figure.add_trace(
             go.Scatterpolar(
                 r=values + [values[0]],
                 theta=categories + [categories[0]],
                 fill="toself",
-                fillcolor=_rgba(colors[index % len(colors)], 0.13),
-                line={"color": colors[index % len(colors)], "width": 2.4},
+                fillcolor=_rgba(plan_color, 0.13),
+                line={"color": plan_color, "width": 2.4},
                 name=plan_name,
                 hovertemplate="%{theta}: %{r:.1f}<extra></extra>",
             )
@@ -1770,8 +1783,8 @@ def build_cost_figure(plan: dict) -> go.Figure:
             values=values,
             hole=0.58,
             marker={
-                "colors": [COLORS["orange"], COLORS["teal"], COLORS["amber"]],
-                "line": {"color": "#fffdf7", "width": 2},
+                "colors": [COLORS["blue"], COLORS["orange"], COLORS["green"]],
+                "line": {"color": "#1e2534", "width": 2},
             },
             textinfo="label+percent",
             textfont={"size": 11},

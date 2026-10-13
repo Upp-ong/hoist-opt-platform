@@ -9,16 +9,16 @@ import pandas as pd
 APP_CSS = """
 <style>
 :root {
-  --ink: #18211f;
-  --ink-soft: #2b3632;
-  --paper: #f4f1e8;
-  --panel: #fffdf7;
-  --line: #d8d4c8;
-  --muted: #70766f;
-  --orange: #ef6a32;
-  --teal: #0d8b87;
-  --amber: #e3a21a;
-  --red: #c74436;
+  --ink: #141822;
+  --ink-soft: #1e2534;
+  --paper: #141822;
+  --panel: #1e2534;
+  --line: #334155;
+  --muted: #94a3b8;
+  --orange: #f97316;
+  --teal: #2563eb;
+  --amber: #eab308;
+  --red: #ef4444;
 }
 
 html, body, [class*="css"] {
@@ -588,6 +588,267 @@ div[data-testid="stPopoverBody"] .stButton button:hover {
   height: 30px;
 }
 
+/* Dark engineering theme overrides */
+:root {
+  --ink: #141822;
+  --ink-soft: #1e2534;
+  --paper: #141822;
+  --panel: #1e2534;
+  --line: #334155;
+  --muted: #94a3b8;
+  --orange: #f97316;
+  --teal: #2563eb;
+  --amber: #eab308;
+  --red: #ef4444;
+}
+
+[data-testid="stAppViewContainer"],
+[data-testid="stHeader"],
+[data-testid="stAppViewContainer"] > .main {
+  background: #141822 !important;
+  color: #cbd5e1 !important;
+}
+
+[data-testid="stSidebar"] {
+  background: #0f131c !important;
+}
+
+[data-testid="stSidebar"] * {
+  color: #cbd5e1;
+}
+
+[data-testid="stSidebar"] .sidebar-readout {
+  background: #1e2534 !important;
+  border-left-color: #2563eb !important;
+}
+
+[data-testid="stSidebar"] .sidebar-readout span {
+  color: #94a3b8 !important;
+}
+
+.app-hero {
+  background: #0b0f16 !important;
+  border-color: #334155 !important;
+  border-left-color: #2563eb !important;
+}
+
+.app-kicker {
+  color: #94a3b8 !important;
+}
+
+.app-title {
+  color: #ffffff !important;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+.app-subtitle {
+  color: #cbd5e1 !important;
+}
+
+.status-chip {
+  background: #1e2534 !important;
+  border-color: #334155 !important;
+  color: #cbd5e1 !important;
+}
+
+.status-chip.ready {
+  border-color: #2563eb !important;
+  color: #93c5fd !important;
+}
+
+.status-chip.warn {
+  border-color: #f97316 !important;
+  color: #fdba74 !important;
+}
+
+.section-label,
+.subsection-note {
+  color: #94a3b8 !important;
+}
+
+.subsection-heading {
+  color: #f8fafc !important;
+  position: relative;
+  padding-left: 12px;
+}
+
+.subsection-heading::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 4px;
+  bottom: 4px;
+  width: 3px;
+  background: #2563eb;
+  border-radius: 2px;
+}
+
+[data-testid="stMetric"] {
+  background: #1e2534 !important;
+  border: 1px solid #334155 !important;
+  border-top: 3px solid #2563eb !important;
+  border-radius: 6px !important;
+  padding: 18px 18px 16px !important;
+  min-height: 118px;
+  transition: background .16s ease, border-color .16s ease;
+}
+
+[data-testid="stMetric"]:hover {
+  background: #242c3d !important;
+  border-color: #475569 !important;
+}
+
+[data-testid="stMetric"] label,
+[data-testid="stMetricLabel"] {
+  color: #94a3b8 !important;
+  font-size: 11px !important;
+}
+
+[data-testid="stMetricValue"] {
+  color: #ffffff !important;
+  font-size: 30px !important;
+  font-weight: 800 !important;
+}
+
+[data-testid="stMetricDelta"] {
+  color: #22c55e !important;
+  font-size: 11px !important;
+}
+
+[data-testid="stTabs"] [data-baseweb="tab-list"] {
+  border-bottom: 1px solid #334155 !important;
+  gap: 4px !important;
+}
+
+[data-testid="stTabs"] [data-baseweb="tab"] {
+  color: #94a3b8 !important;
+  border-bottom: none !important;
+  border-radius: 4px 4px 0 0;
+}
+
+[data-testid="stTabs"] [aria-selected="true"] {
+  color: #60a5fa !important;
+  border-bottom: none !important;
+  background: rgba(37, 99, 235, .13) !important;
+}
+
+[data-testid="stPlotlyChart"],
+[data-testid="stDataFrame"],
+[data-testid="stFileUploader"],
+[data-testid="stForm"],
+[data-testid="stCustomComponentV1"],
+[data-testid="stVerticalBlockBorderWrapper"] {
+  background: #1e2534 !important;
+  border: 1px solid #334155 !important;
+  border-radius: 6px !important;
+  padding: 10px !important;
+}
+
+[data-testid="stCustomComponentV1"] iframe {
+  background: #141822 !important;
+}
+
+.stButton button,
+.stDownloadButton button {
+  min-height: 42px;
+  border-radius: 6px !important;
+  border: 1px solid #334155 !important;
+  background: #1e2534 !important;
+  color: #cbd5e1 !important;
+  font-weight: 700;
+  transition: background .16s ease, border-color .16s ease;
+}
+
+.stButton button:hover,
+.stDownloadButton button:hover {
+  background: #283247 !important;
+  border-color: #475569 !important;
+  color: #ffffff !important;
+}
+
+.stButton button[kind="primary"],
+[data-testid="stFormSubmitButton"] button {
+  background: #2563eb !important;
+  border-color: #2563eb !important;
+  color: #ffffff !important;
+}
+
+.stButton button[kind="primary"]:hover,
+[data-testid="stFormSubmitButton"] button:hover {
+  background: #1d4ed8 !important;
+  border-color: #1d4ed8 !important;
+}
+
+.decision-band,
+.plan-tile,
+.risk-note {
+  background: #1e2534 !important;
+  border-color: #334155 !important;
+}
+
+.decision-band h3,
+.plan-tile strong,
+.plan-tile b {
+  color: #f8fafc !important;
+}
+
+.decision-band p,
+.plan-tile span {
+  color: #cbd5e1 !important;
+}
+
+.plan-tile.recommended {
+  background: #202a3d !important;
+  border-top-color: #2563eb !important;
+}
+
+.plan-tile.plan-a {
+  border-top-color: #2563eb !important;
+}
+
+.plan-tile.plan-b {
+  border-top-color: #f97316 !important;
+}
+
+.plan-tile.plan-c {
+  border-top-color: #22c55e !important;
+}
+
+.plan-tile.plan-d {
+  border-top-color: #a855f7 !important;
+}
+
+[data-testid="stTabs"] [role="tabpanel"] {
+  padding-top: 14px !important;
+}
+
+[data-testid="stDataFrame"],
+[data-testid="stPlotlyChart"] {
+  overflow: hidden !important;
+}
+
+[data-testid="stDataFrame"] {
+  padding: 0 !important;
+}
+
+[data-testid="stDataFrame"] > div {
+  border-radius: 5px;
+}
+
+[data-testid="stFileUploader"] {
+  padding: 16px !important;
+}
+
+[data-testid="stExpander"] {
+  background: #1e2534 !important;
+  border: 1px solid #334155 !important;
+  border-radius: 6px !important;
+}
+
+[data-testid="stExpander"] summary {
+  color: #cbd5e1 !important;
+}
+
 @media (max-width: 1100px) {
   .plan-grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -662,41 +923,41 @@ def project_center_visual_html() -> str:
   <svg viewBox="0 0 1100 440" role="img" aria-label="装配式地铁车站龙门吊吊装示意">
     <defs>
       <pattern id="pc-grid" width="38" height="38" patternUnits="userSpaceOnUse">
-        <path d="M 38 0 L 0 0 0 38" fill="none" stroke="#40504a" stroke-width="1" opacity=".28"/>
+        <path d="M 38 0 L 0 0 0 38" fill="none" stroke="#334155" stroke-width="1" opacity=".28"/>
       </pattern>
       <linearGradient id="pc-sky" x1="0" y1="0" x2="0" y2="1">
-        <stop offset="0" stop-color="#202b27"/>
-        <stop offset="1" stop-color="#141c19"/>
+        <stop offset="0" stop-color="#1e2534"/>
+        <stop offset="1" stop-color="#141822"/>
       </linearGradient>
       <linearGradient id="pc-slab" x1="0" y1="0" x2="1" y2="0">
-        <stop offset="0" stop-color="#e3a21a"/>
-        <stop offset="1" stop-color="#ef6a32"/>
+        <stop offset="0" stop-color="#eab308"/>
+        <stop offset="1" stop-color="#f97316"/>
       </linearGradient>
     </defs>
 
     <rect width="1100" height="440" fill="url(#pc-sky)"/>
     <rect width="1100" height="440" fill="url(#pc-grid)"/>
 
-    <path d="M0 352 H1100" stroke="#3d4a44" stroke-width="2"/>
-    <path d="M0 367 H1100" stroke="#2b3632" stroke-width="1"/>
+    <path d="M0 352 H1100" stroke="#334155" stroke-width="2"/>
+    <path d="M0 367 H1100" stroke="#1e2534" stroke-width="1"/>
 
     <g opacity=".92">
-      <path d="M150 328 Q550 374 950 328" fill="none" stroke="#ef6a32" stroke-width="10" stroke-linecap="round"/>
-      <path d="M174 316 Q550 356 926 316" fill="none" stroke="#f0b45c" stroke-width="3" opacity=".72"/>
-      <rect x="196" y="286" width="184" height="18" rx="4" fill="#0d8b87" opacity=".9"/>
-      <rect x="720" y="286" width="184" height="18" rx="4" fill="#0d8b87" opacity=".9"/>
+      <path d="M150 328 Q550 374 950 328" fill="none" stroke="#f97316" stroke-width="10" stroke-linecap="round"/>
+      <path d="M174 316 Q550 356 926 316" fill="none" stroke="#eab308" stroke-width="3" opacity=".72"/>
+      <rect x="196" y="286" width="184" height="18" rx="4" fill="#2563eb" opacity=".9"/>
+      <rect x="720" y="286" width="184" height="18" rx="4" fill="#2563eb" opacity=".9"/>
     </g>
 
     <g>
       <rect x="272" y="194" width="556" height="19" rx="5" fill="url(#pc-slab)"/>
-      <rect x="300" y="213" width="500" height="5" rx="2" fill="#9f6c21" opacity=".65"/>
+      <rect x="300" y="213" width="500" height="5" rx="2" fill="#a855f7" opacity=".65"/>
 
-      <g stroke="#d8e2dc" stroke-width="8" stroke-linecap="round">
+      <g stroke="#cbd5e1" stroke-width="8" stroke-linecap="round">
         <path d="M386 213 V315"/>
         <path d="M550 213 V315"/>
         <path d="M714 213 V315"/>
       </g>
-      <g fill="#bce7e3">
+      <g fill="#93c5fd">
         <rect x="374" y="207" width="24" height="9" rx="3"/>
         <rect x="538" y="207" width="24" height="9" rx="3"/>
         <rect x="702" y="207" width="24" height="9" rx="3"/>
@@ -705,55 +966,55 @@ def project_center_visual_html() -> str:
         <rect x="702" y="313" width="24" height="9" rx="3"/>
       </g>
 
-      <path d="M244 190 Q550 70 856 190" fill="none" stroke="#0d8b87" stroke-width="11" stroke-linecap="round"/>
-      <path d="M260 190 Q550 87 840 190" fill="none" stroke="#64c7c2" stroke-width="2" opacity=".62"/>
-      <g stroke="#4a5d55" stroke-width="2" opacity=".85">
+      <path d="M244 190 Q550 70 856 190" fill="none" stroke="#2563eb" stroke-width="11" stroke-linecap="round"/>
+      <path d="M260 190 Q550 87 840 190" fill="none" stroke="#60a5fa" stroke-width="2" opacity=".62"/>
+      <g stroke="#475569" stroke-width="2" opacity=".85">
         <path d="M310 172 L328 118"/>
         <path d="M410 142 L422 98"/>
         <path d="M550 120 V74"/>
         <path d="M690 142 L678 98"/>
         <path d="M790 172 L772 118"/>
       </g>
-      <path d="M244 190 V318" stroke="#40504a" stroke-width="5" stroke-dasharray="8 9"/>
-      <path d="M856 190 V318" stroke="#40504a" stroke-width="5" stroke-dasharray="8 9"/>
+      <path d="M244 190 V318" stroke="#334155" stroke-width="5" stroke-dasharray="8 9"/>
+      <path d="M856 190 V318" stroke="#334155" stroke-width="5" stroke-dasharray="8 9"/>
     </g>
 
     <g>
-      <path d="M486 315 H512 V286 H534 V258 H556 V230 H578" fill="none" stroke="#f5f1e7" stroke-width="5" stroke-linejoin="round"/>
-      <path d="M486 315 H512" stroke="#0d8b87" stroke-width="9" stroke-linecap="round"/>
+      <path d="M486 315 H512 V286 H534 V258 H556 V230 H578" fill="none" stroke="#cbd5e1" stroke-width="5" stroke-linejoin="round"/>
+      <path d="M486 315 H512" stroke="#2563eb" stroke-width="9" stroke-linecap="round"/>
     </g>
 
     <g>
-      <path d="M120 52 H978" stroke="#ef6a32" stroke-width="17" stroke-linecap="round"/>
-      <path d="M122 75 H976" stroke="#9f6c21" stroke-width="5" stroke-linecap="round" opacity=".75"/>
-      <path d="M178 60 V348" stroke="#d8e2dc" stroke-width="13" stroke-linecap="round"/>
-      <path d="M920 60 V348" stroke="#d8e2dc" stroke-width="13" stroke-linecap="round"/>
-      <path d="M148 92 H208 M892 92 H952" stroke="#e3a21a" stroke-width="8" stroke-linecap="round"/>
-      <path d="M151 330 H206 M894 330 H949" stroke="#40504a" stroke-width="8" stroke-linecap="round"/>
-      <rect x="520" y="62" width="92" height="23" rx="5" fill="#e3a21a"/>
-      <rect x="534" y="67" width="28" height="13" rx="3" fill="#18211f" opacity=".72"/>
-      <path d="M566 85 V150" stroke="#f5f1e7" stroke-width="3" stroke-dasharray="7 7"/>
-      <path d="M548 150 H584" stroke="#f5f1e7" stroke-width="4" stroke-linecap="round"/>
-      <path d="M554 150 Q566 174 578 150" fill="none" stroke="#ef6a32" stroke-width="4"/>
-      <rect x="514" y="177" width="104" height="29" rx="5" fill="#0d8b87" stroke="#bce7e3" stroke-width="3"/>
-      <path d="M530 191 H602 M530 198 H586" stroke="#d9f4f1" stroke-width="3" stroke-linecap="round" opacity=".8"/>
+      <path d="M120 52 H978" stroke="#f97316" stroke-width="17" stroke-linecap="round"/>
+      <path d="M122 75 H976" stroke="#a855f7" stroke-width="5" stroke-linecap="round" opacity=".75"/>
+      <path d="M178 60 V348" stroke="#cbd5e1" stroke-width="13" stroke-linecap="round"/>
+      <path d="M920 60 V348" stroke="#cbd5e1" stroke-width="13" stroke-linecap="round"/>
+      <path d="M148 92 H208 M892 92 H952" stroke="#eab308" stroke-width="8" stroke-linecap="round"/>
+      <path d="M151 330 H206 M894 330 H949" stroke="#334155" stroke-width="8" stroke-linecap="round"/>
+      <rect x="520" y="62" width="92" height="23" rx="5" fill="#eab308"/>
+      <rect x="534" y="67" width="28" height="13" rx="3" fill="#141822" opacity=".72"/>
+      <path d="M566 85 V150" stroke="#cbd5e1" stroke-width="3" stroke-dasharray="7 7"/>
+      <path d="M548 150 H584" stroke="#cbd5e1" stroke-width="4" stroke-linecap="round"/>
+      <path d="M554 150 Q566 174 578 150" fill="none" stroke="#f97316" stroke-width="4"/>
+      <rect x="514" y="177" width="104" height="29" rx="5" fill="#2563eb" stroke="#93c5fd" stroke-width="3"/>
+      <path d="M530 191 H602 M530 198 H586" stroke="#bfdbfe" stroke-width="3" stroke-linecap="round" opacity=".8"/>
     </g>
 
     <g opacity=".9">
-      <rect x="42" y="278" width="74" height="22" rx="3" fill="#0d8b87"/>
-      <rect x="52" y="258" width="54" height="20" rx="3" fill="#4a5d55"/>
-      <rect x="64" y="239" width="34" height="19" rx="3" fill="#e3a21a"/>
-      <rect x="982" y="276" width="76" height="24" rx="3" fill="#0d8b87"/>
-      <rect x="994" y="254" width="52" height="22" rx="3" fill="#4a5d55"/>
-      <rect x="1006" y="234" width="30" height="20" rx="3" fill="#ef6a32"/>
+      <rect x="42" y="278" width="74" height="22" rx="3" fill="#2563eb"/>
+      <rect x="52" y="258" width="54" height="20" rx="3" fill="#334155"/>
+      <rect x="64" y="239" width="34" height="19" rx="3" fill="#eab308"/>
+      <rect x="982" y="276" width="76" height="24" rx="3" fill="#2563eb"/>
+      <rect x="994" y="254" width="52" height="22" rx="3" fill="#334155"/>
+      <rect x="1006" y="234" width="30" height="20" rx="3" fill="#f97316"/>
     </g>
 
-    <g fill="#99a49e" font-family="Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="2">
+    <g fill="#94a3b8" font-family="Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="2">
       <text x="42" y="404">PRECAST COMPONENTS</text>
       <text x="812" y="404">GANTRY / HOISTING</text>
     </g>
-    <path d="M42 390 H204" stroke="#0d8b87" stroke-width="3"/>
-    <path d="M812 390 H974" stroke="#ef6a32" stroke-width="3"/>
+    <path d="M42 390 H204" stroke="#2563eb" stroke-width="3"/>
+    <path d="M812 390 H974" stroke="#f97316" stroke-width="3"/>
   </svg>
 </div>
 """
@@ -771,7 +1032,18 @@ def sidebar_readout(label: str, value: str) -> str:
 def plan_tiles_html(plans: dict[str, dict], recommended_name: str = "综合推荐") -> str:
     tiles: list[str] = []
     for plan_name, plan in plans.items():
-        classes = "plan-tile recommended" if plan_name == recommended_name else "plan-tile"
+        prefix = str(plan_name).strip()[:1].upper()
+        color_class = {
+            "A": "plan-a",
+            "B": "plan-b",
+            "C": "plan-c",
+            "D": "plan-d",
+        }.get(prefix, "")
+        classes = "plan-tile"
+        if color_class:
+            classes += f" {color_class}"
+        if plan_name == recommended_name:
+            classes += " recommended"
         tiles.append(
             f"""
 <div class="{classes}">
@@ -840,6 +1112,28 @@ def schedule_frame(schedule: Sequence[dict]) -> pd.DataFrame:
     ]:
         frame[column] = frame[column].round(2)
     return frame
+
+
+def highlight_high_risk_rows(
+    frame: pd.DataFrame,
+    threshold: float = 35.0,
+) -> pd.io.formats.style.Styler:
+    """Apply a restrained warning treatment to high-risk schedule rows."""
+    if frame.empty:
+        return frame.style
+
+    def _style_row(row: pd.Series) -> list[str]:
+        risk_value = pd.to_numeric(row.iloc[-1], errors="coerce")
+        risk = 0.0 if pd.isna(risk_value) else float(risk_value)
+        style = (
+            "background-color: rgba(249, 115, 22, 0.16); "
+            "color: #fdba74; font-weight: 600;"
+            if risk >= threshold
+            else ""
+        )
+        return [style for _ in row]
+
+    return frame.style.apply(_style_row, axis=1)
 
 
 def decision_summary(plan: dict, component_count: int) -> str:
