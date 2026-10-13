@@ -198,7 +198,8 @@ div[data-testid="stPopoverBody"] .stButton button:hover {
 }
 
 .app-title {
-  color: #fffdf7;
+  color: #fffdf7 !important;
+  -webkit-text-fill-color: #fffdf7 !important;
   font-size: clamp(25px, 2.25vw, 39px);
   line-height: 1.12;
   letter-spacing: 0;
