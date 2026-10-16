@@ -492,6 +492,10 @@ st.session_state.setdefault("applied_progress", 0)
 
 with st.sidebar:
     st.markdown(sidebar_brand_html(), unsafe_allow_html=True)
+    presentation_mode = st.checkbox(
+        "演示模式（一屏展示）",
+        key="presentation_mode",
+    )
     with st.container():
         imported_components = st.session_state.get("imported_components")
         active_config = st.session_state.active_config
@@ -1046,6 +1050,48 @@ if submitted:
     st.rerun()
 
 
+if presentation_mode:
+    st.markdown(
+        """
+<style>
+[data-testid="stAppViewContainer"] {
+  zoom: .78;
+}
+.block-container {
+  max-width: 1760px !important;
+  padding-top: .35rem !important;
+  padding-bottom: .55rem !important;
+}
+.app-hero {
+  display: none !important;
+}
+[data-testid="stMetric"] {
+  min-height: 84px !important;
+  padding: 8px 10px !important;
+}
+[data-testid="stMetricValue"] {
+  font-size: 22px !important;
+}
+.subsection-heading {
+  font-size: 15px !important;
+  margin: 4px 0 1px !important;
+}
+.subsection-note {
+  display: none !important;
+}
+[data-testid="stTabs"] [role="tabpanel"] {
+  padding-top: 6px !important;
+}
+[data-testid="stPlotlyChart"],
+[data-testid="stDataFrame"] {
+  margin-top: 0 !important;
+  margin-bottom: 4px !important;
+}
+</style>
+""",
+        unsafe_allow_html=True,
+    )
+
 result: OptimizationResult = st.session_state.result
 components = result.components
 cranes = st.session_state.cranes
@@ -1551,10 +1597,12 @@ with sequence_tab:
             unsafe_allow_html=True,
         )
         st.dataframe(
-            highlight_high_risk_rows(schedule_data.head(18)),
+            highlight_high_risk_rows(
+                schedule_data.head(12 if presentation_mode else 18)
+            ),
             use_container_width=True,
             hide_index=True,
-            height=500,
+            height=240 if presentation_mode else 500,
         )
     with risk_column:
         st.markdown(
@@ -1603,7 +1651,12 @@ with tradeoff_tab:
     front_frame = front_frame[
         ["Pareto序号", "工期(工日)", "成本(万元)", "安全风险指数"]
     ].round(2)
-    st.dataframe(front_frame, use_container_width=True, hide_index=True, height=280)
+    st.dataframe(
+        front_frame,
+        use_container_width=True,
+        hide_index=True,
+        height=170 if presentation_mode else 280,
+    )
 
 
 with decision_tab:
@@ -1643,7 +1696,11 @@ with decision_tab:
             '<div class="subsection-heading">多维指标对照</div>',
             unsafe_allow_html=True,
         )
-        st.dataframe(comparison, use_container_width=True)
+        st.dataframe(
+            comparison,
+            use_container_width=True,
+            height=220 if presentation_mode else None,
+        )
     st.markdown(
         '<div class="risk-note">'
         "方案推演中的碰撞风险来自吊装顺序、构件空间邻近度和高度变化，"
@@ -1928,7 +1985,7 @@ with project_data_tab:
         filtered_frame,
         use_container_width=True,
         hide_index=True,
-        height=470,
+            height=260 if presentation_mode else 470,
     )
     bom_csv = component_frame.to_csv(index=False).encode("utf-8-sig")
     st.download_button(
