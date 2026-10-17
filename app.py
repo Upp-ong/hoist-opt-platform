@@ -1072,6 +1072,9 @@ if presentation_mode:
 [data-testid="stMetricValue"] {
   font-size: 22px !important;
 }
+[data-testid="stVerticalBlock"] {
+  gap: .65rem !important;
+}
 .subsection-heading {
   font-size: 15px !important;
   margin: 4px 0 1px !important;
@@ -1079,13 +1082,28 @@ if presentation_mode:
 .subsection-note {
   display: none !important;
 }
+.section-label {
+  font-size: 9px !important;
+  margin: 2px 0 0 !important;
+}
+[data-testid="stTabs"] [data-baseweb="tab-list"] {
+  gap: 1px !important;
+}
+[data-testid="stTabs"] [data-baseweb="tab"] {
+  height: 34px !important;
+  padding: 0 11px !important;
+  font-size: 11px !important;
+}
 [data-testid="stTabs"] [role="tabpanel"] {
-  padding-top: 6px !important;
+  padding-top: 4px !important;
 }
 [data-testid="stPlotlyChart"],
 [data-testid="stDataFrame"] {
   margin-top: 0 !important;
-  margin-bottom: 4px !important;
+  margin-bottom: 3px !important;
+}
+[data-testid="stDataFrame"] {
+  border-radius: 4px !important;
 }
 </style>
 """,
