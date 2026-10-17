@@ -1696,11 +1696,17 @@ with decision_tab:
             '<div class="subsection-heading">多维指标对照</div>',
             unsafe_allow_html=True,
         )
-        st.dataframe(
-            comparison,
-            use_container_width=True,
-            height=220 if presentation_mode else None,
-        )
+        if presentation_mode:
+            st.dataframe(
+                comparison,
+                use_container_width=True,
+                height=220,
+            )
+        else:
+            st.dataframe(
+                comparison,
+                use_container_width=True,
+            )
     st.markdown(
         '<div class="risk-note">'
         "方案推演中的碰撞风险来自吊装顺序、构件空间邻近度和高度变化，"
