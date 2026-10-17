@@ -876,6 +876,349 @@ div[data-testid="stPopoverBody"] .stButton button:hover {
     min-height: 92px;
   }
 }
+
+/* Refined engineering-console surface system */
+:root {
+  --surface-0: #101620;
+  --surface-1: #182131;
+  --surface-2: #1e293b;
+  --surface-3: #263449;
+  --line-soft: #2c3b50;
+  --line-strong: #3b4f69;
+  --accent: #3b82f6;
+  --accent-strong: #2563eb;
+  --success: #22c55e;
+  --warning: #f97316;
+  --danger: #ef4444;
+  --alt: #a855f7;
+}
+
+html,
+body,
+[class*="css"] {
+  font-family:
+    "HarmonyOS Sans SC",
+    "Source Han Sans SC",
+    "Microsoft YaHei",
+    "Noto Sans CJK SC",
+    sans-serif;
+  font-feature-settings: "kern" 1, "tnum" 1;
+}
+
+[data-testid="stAppViewContainer"] {
+  background:
+    linear-gradient(180deg, #0f151f 0, #141822 240px, #141822 100%) !important;
+}
+
+[data-testid="stHeader"] {
+  background: rgba(15, 21, 31, .92) !important;
+  border-bottom: 1px solid rgba(59, 79, 105, .55);
+  backdrop-filter: blur(12px);
+}
+
+.block-container {
+  max-width: 1560px !important;
+  padding-top: .9rem !important;
+  padding-bottom: 1.6rem !important;
+}
+
+[data-testid="stSidebar"] {
+  background:
+    linear-gradient(180deg, #0b111a 0, #101722 100%) !important;
+  border-right: 1px solid #2c3b50 !important;
+  box-shadow: 10px 0 28px rgba(0, 0, 0, .22);
+}
+
+[data-testid="stSidebar"] label,
+[data-testid="stSidebar"] [data-testid="stMarkdownContainer"] {
+  letter-spacing: 0;
+}
+
+[data-testid="stSidebar"] hr {
+  border-color: #2c3b50 !important;
+}
+
+.app-hero {
+  background:
+    linear-gradient(115deg, rgba(37, 99, 235, .12), transparent 50%),
+    #0c111a !important;
+  border: 1px solid #2c3b50 !important;
+  border-left: 4px solid var(--accent-strong) !important;
+  border-radius: 6px;
+  box-shadow:
+    0 18px 38px rgba(0, 0, 0, .24),
+    inset 0 1px 0 rgba(255, 255, 255, .035);
+}
+
+.app-title {
+  letter-spacing: 0 !important;
+  line-height: 1.08 !important;
+}
+
+.app-subtitle {
+  color: #aebbd0 !important;
+  max-width: 920px;
+}
+
+[data-testid="stMetric"] {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, .025), transparent 55%),
+    var(--surface-1) !important;
+  border: 1px solid var(--line-soft) !important;
+  border-top-width: 2px !important;
+  border-radius: 6px !important;
+  padding: 13px 15px 12px !important;
+  min-height: 98px !important;
+  box-shadow:
+    0 10px 24px rgba(0, 0, 0, .18),
+    inset 0 1px 0 rgba(255, 255, 255, .035);
+}
+
+[data-testid="stMetric"]:hover {
+  background:
+    linear-gradient(180deg, rgba(59, 130, 246, .08), transparent 60%),
+    #1c2738 !important;
+  border-color: var(--line-strong) !important;
+  transform: translateY(-1px);
+}
+
+[data-testid="stMetricLabel"],
+[data-testid="stMetric"] label {
+  color: #93a4bc !important;
+  font-size: 10px !important;
+  font-weight: 650 !important;
+  letter-spacing: .02em;
+}
+
+[data-testid="stMetricValue"] {
+  color: #f8fafc !important;
+  font-size: 27px !important;
+  font-weight: 750 !important;
+  font-variant-numeric: tabular-nums;
+  letter-spacing: 0;
+}
+
+[data-testid="stMetricDelta"] {
+  color: var(--success) !important;
+  font-size: 10px !important;
+  font-variant-numeric: tabular-nums;
+}
+
+[data-testid="column"]:nth-child(2) [data-testid="stMetric"] {
+  border-top-color: var(--warning) !important;
+}
+
+[data-testid="column"]:nth-child(3) [data-testid="stMetric"] {
+  border-top-color: var(--success) !important;
+}
+
+[data-testid="column"]:nth-child(4) [data-testid="stMetric"] {
+  border-top-color: var(--alt) !important;
+}
+
+[data-testid="stTabs"] [data-baseweb="tab-list"] {
+  background: rgba(16, 22, 32, .7) !important;
+  border: 1px solid var(--line-soft) !important;
+  border-radius: 6px !important;
+  padding: 3px !important;
+  gap: 3px !important;
+}
+
+[data-testid="stTabs"] [data-baseweb="tab"] {
+  min-height: 36px !important;
+  border-radius: 4px !important;
+  color: #8fa0b8 !important;
+  font-size: 12px !important;
+  font-weight: 650 !important;
+}
+
+[data-testid="stTabs"] [aria-selected="true"] {
+  color: #ffffff !important;
+  background:
+    linear-gradient(180deg, rgba(59, 130, 246, .28), rgba(37, 99, 235, .16)) !important;
+  border: 1px solid rgba(96, 165, 250, .36) !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .08);
+}
+
+[data-testid="stPlotlyChart"],
+[data-testid="stDataFrame"],
+[data-testid="stFileUploader"],
+[data-testid="stForm"],
+[data-testid="stCustomComponentV1"],
+[data-testid="stVerticalBlockBorderWrapper"] {
+  background: var(--surface-1) !important;
+  border: 1px solid var(--line-soft) !important;
+  border-radius: 6px !important;
+  box-shadow:
+    0 8px 22px rgba(0, 0, 0, .17),
+    inset 0 1px 0 rgba(255, 255, 255, .025);
+}
+
+[data-testid="stDataFrame"] {
+  background: #151d2b !important;
+}
+
+[data-testid="stDataFrame"] [data-testid="stElementToolbar"] {
+  opacity: .45;
+  transition: opacity .16s ease;
+}
+
+[data-testid="stDataFrame"]:hover [data-testid="stElementToolbar"] {
+  opacity: 1;
+}
+
+[data-testid="stFileUploader"] {
+  border-style: dashed !important;
+}
+
+[data-testid="stFileUploader"]:hover {
+  border-color: #4d6485 !important;
+  background: #1b2637 !important;
+}
+
+[data-testid="stExpander"] {
+  background: #161f2d !important;
+  border: 1px solid var(--line-soft) !important;
+  border-radius: 6px !important;
+}
+
+[data-testid="stExpander"] summary:hover {
+  background: rgba(59, 130, 246, .06);
+}
+
+.subsection-heading {
+  color: #eef4ff !important;
+  font-size: 16px !important;
+  font-weight: 720 !important;
+  line-height: 1.35;
+  margin: 8px 0 2px !important;
+  padding-left: 11px !important;
+}
+
+.subsection-heading::before {
+  top: 3px !important;
+  bottom: 3px !important;
+  width: 3px !important;
+  background: var(--accent-strong) !important;
+}
+
+.subsection-note,
+.section-label {
+  color: #8fa0b8 !important;
+}
+
+.section-label {
+  letter-spacing: .08em;
+}
+
+.plan-tile {
+  background:
+    linear-gradient(180deg, rgba(255, 255, 255, .025), transparent 62%),
+    var(--surface-1) !important;
+  border: 1px solid var(--line-soft) !important;
+  border-radius: 6px !important;
+  padding: 13px 14px !important;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, .16);
+}
+
+.plan-tile:hover {
+  border-color: var(--line-strong) !important;
+  background: #1c2738 !important;
+}
+
+.plan-tile.recommended {
+  background:
+    linear-gradient(180deg, rgba(59, 130, 246, .16), transparent 72%),
+    #1b2638 !important;
+  box-shadow:
+    0 12px 28px rgba(0, 0, 0, .2),
+    inset 0 1px 0 rgba(147, 197, 253, .12);
+}
+
+.decision-band {
+  background:
+    linear-gradient(110deg, rgba(37, 99, 235, .14), transparent 55%),
+    var(--surface-1) !important;
+  border: 1px solid var(--line-soft) !important;
+  border-left: 3px solid var(--accent-strong) !important;
+  border-radius: 6px !important;
+  box-shadow: 0 10px 26px rgba(0, 0, 0, .18);
+}
+
+.risk-note {
+  background: #201b16 !important;
+  border: 1px solid rgba(249, 115, 22, .32) !important;
+  border-left: 3px solid var(--warning) !important;
+  border-radius: 5px !important;
+  color: #d7c5b4 !important;
+}
+
+.stButton button,
+.stDownloadButton button,
+[data-testid="stFormSubmitButton"] button {
+  min-height: 38px !important;
+  border-radius: 5px !important;
+  font-size: 12px !important;
+  font-weight: 680 !important;
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .045);
+}
+
+.stButton button[kind="primary"],
+[data-testid="stFormSubmitButton"] button {
+  background: var(--accent-strong) !important;
+  border-color: #3b82f6 !important;
+  box-shadow:
+    0 7px 18px rgba(37, 99, 235, .24),
+    inset 0 1px 0 rgba(255, 255, 255, .16);
+}
+
+.stButton button[kind="primary"]:hover,
+[data-testid="stFormSubmitButton"] button:hover {
+  background: #3273f6 !important;
+  border-color: #60a5fa !important;
+}
+
+.stButton button:focus-visible,
+.stDownloadButton button:focus-visible,
+[data-baseweb="tab"]:focus-visible {
+  outline: 2px solid #60a5fa !important;
+  outline-offset: 2px;
+}
+
+* {
+  scrollbar-width: thin;
+  scrollbar-color: #40536e #111924;
+}
+
+*::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+*::-webkit-scrollbar-track {
+  background: #111924;
+}
+
+*::-webkit-scrollbar-thumb {
+  background: #40536e;
+  border: 2px solid #111924;
+  border-radius: 8px;
+}
+
+@media (max-width: 900px) {
+  .block-container {
+    padding-left: .8rem !important;
+    padding-right: .8rem !important;
+  }
+
+  [data-testid="stMetric"] {
+    min-height: 90px !important;
+  }
+
+  [data-testid="stMetricValue"] {
+    font-size: 23px !important;
+  }
+}
 </style>
 """
 
