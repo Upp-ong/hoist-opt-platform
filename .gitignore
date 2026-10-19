@@ -6,4 +6,5 @@ outputs/
 projects/
 
 .pnpm-store/
+.npm-cache/
 assets/project_center_*.png
